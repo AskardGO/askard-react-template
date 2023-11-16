@@ -1,6 +1,6 @@
 import {useEffect, useState, useRef, ReactNode, MouseEventHandler, MouseEvent} from 'react';
 import './App.scss';
-import {Button, Card, CardActions, CardContent, Typography} from '@mui/material';
+import {Button, Card, CardActions, CardContent, Fade, Tooltip, Typography} from '@mui/material';
 import {Telegram, GitHub, LinkedIn} from "@mui/icons-material";
 
 import gsap from 'gsap';
@@ -48,17 +48,27 @@ const IconButton = ({icon, onClick}: { icon: ReactNode, onClick?: MouseEventHand
     }
 
     return (
-        <div className='icon__button'>
-            <button ref={buttonRef} className="icon-button" onClick={!isButtonDisabled ? onClickHandler : undefined}>
-                {icon}
-            </button>
-            {
-                buttonRef &&
-                <div ref={mirrorRef}>
+        <Tooltip
+            TransitionComponent={Fade}
+            TransitionProps={{ timeout: 600 }}
+            arrow
+            title="Add"
+        >
+            <div className='icon__button'>
+
+                <button ref={buttonRef} className="icon-button" onClick={!isButtonDisabled ? onClickHandler : undefined}>
                     {icon}
-                </div>
-            }
-        </div>
+                </button>
+
+                {
+                    buttonRef &&
+                    <div ref={mirrorRef}>
+                        {icon}
+                    </div>
+                }
+
+            </div>
+        </Tooltip>
     );
 };
 const App = () => {
