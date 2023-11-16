@@ -21,7 +21,7 @@ const LoadingDots = () => {
     return <div>{dots}</div>;
 };
 
-const IconButton = ({icon, onClick}: { icon: ReactNode, onClick?: MouseEventHandler<HTMLButtonElement> }) => {
+const IconButton = ({icon, onClick, tooltipTitle}: { icon: ReactNode, tooltipTitle?: string, onClick?: MouseEventHandler<HTMLButtonElement> }) => {
 
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     const buttonRef = useRef(null);
@@ -52,7 +52,7 @@ const IconButton = ({icon, onClick}: { icon: ReactNode, onClick?: MouseEventHand
             TransitionComponent={Fade}
             TransitionProps={{ timeout: 600 }}
             arrow
-            title="Add"
+            title={tooltipTitle}
         >
             <div className='icon__button'>
 
@@ -92,9 +92,9 @@ const App = () => {
                         </Typography>
                     </CardContent>
                     <CardActions sx={{display: 'flex', justifyContent: 'space-around'}}>
-                        <IconButton icon={<GitHub/>}/>
-                        <IconButton icon={<Telegram/>}/>
-                        <IconButton icon={<LinkedIn/>}/>
+                        <IconButton icon={<GitHub/>} tooltipTitle="GitHub"/>
+                        <IconButton icon={<Telegram/>} tooltipTitle="Telegram"/>
+                        <IconButton icon={<LinkedIn/>} tooltipTitle="LinkedIn"/>
                     </CardActions>
                 </Card>
             </div>
